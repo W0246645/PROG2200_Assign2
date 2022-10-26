@@ -31,6 +31,8 @@ namespace Delegates
                     // an invalid zone, otherwise continue
                     if (theDest != null)
                     {
+                        //Simple while loop to make sure item price is greater than 0.
+                        //Also changed the parse to a try parse so it wouldn't crash if given a bad value. ie letter or whitespace.
                         decimal itemPrice = 0;
                         while (itemPrice <= 0)
                         {
@@ -51,7 +53,9 @@ namespace Delegates
                                 itemFee += 25.0m;
                             };
                         }
-                        if (!theDest.m_isHighRisk) {
+                        //Check if low risk then use the delegate and check within if the returned fee is high enough to apply the $10 discount.
+                        if (!theDest.m_isHighRisk)
+                        {
                             theDel += delegate (decimal thePrice, ref decimal itemFee)
                             {
                                 if (itemFee > 100)
@@ -60,9 +64,6 @@ namespace Delegates
                                 }
                             };
                         }
-
-
-
                         // now all that is left to do is call the delegate and output
                         // the shipping fee to the Console
                         decimal theFee = 0.0m;
