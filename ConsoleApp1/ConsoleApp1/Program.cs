@@ -51,6 +51,17 @@ namespace Delegates
                                 itemFee += 25.0m;
                             };
                         }
+                        if (!theDest.m_isHighRisk) {
+                            theDel += delegate (decimal thePrice, ref decimal itemFee)
+                            {
+                                if (itemFee > 100)
+                                {
+                                    itemFee -= 10;
+                                }
+                            };
+                        }
+
+
 
                         // now all that is left to do is call the delegate and output
                         // the shipping fee to the Console
